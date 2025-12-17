@@ -439,6 +439,7 @@ architecture Behavioral of toplevel is
   u_Miku_Inst : entity mylib.MikumariBlock
     generic map(
       -- CBT generic -------------------------------------------------------------
+      kFamily          => "7S",
       -- CDCM-Mod-Pattern --
       kCdcmModWidth    => 8,
       -- CDCM-TX --
@@ -453,6 +454,7 @@ architecture Behavioral of toplevel is
       kFixIdelayTap    => FALSE,
       kFreqFastClk     => 500.0,
       kFreqRefClk      => 200.0,
+      kBitslice0       => FALSE,
       -- Encoder/Decoder
       kNumEncodeBits   => 1,
       -- Master/Slave
@@ -470,7 +472,8 @@ architecture Behavioral of toplevel is
       -- System ports -----------------------------------------------------------
       rst           => system_reset,
       pwrOnRst      => pwr_on_reset,
-      clkSer        => clk_fast,
+      clkSerTx      => clk_fast,
+      clkSerRx      => clk_fast,
       clkPar        => clk_slow,
       clkIndep      => clk_gbe,
       clkIdctrl     => clk_gbe,
@@ -494,6 +497,8 @@ architecture Behavioral of toplevel is
       bitslipNum    => open,
       serdesOffset  => open,
       firstBitPatt  => open,
+      cntValueOutInit => open,
+      cntValueOutSlaveInit => open,
 
       -- Mikumari ports -------------------------------------------------------
       linkUp        => mikumari_link_up,
